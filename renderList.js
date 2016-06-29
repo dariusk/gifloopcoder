@@ -5,9 +5,6 @@ var Canvas = require('canvas')
 , context = canvasGlobal.getContext('2d');
 var fs = require('fs');
 
-
-
-
 module.exports = function(){
   var shape = new Shape();
 

@@ -18,15 +18,11 @@ module.exports = function() {
         renderCallback(t);
       }
       advance();
-      setTimeout(onTimeout, 1000 / fps);
+      render();
     }
     else if(completeCallback) {
       completeCallback();
     }
-  }
-
-  function onTimeout() {
-    render();
   }
 
   function advance() {
