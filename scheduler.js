@@ -26,7 +26,7 @@ module.exports = function() {
   }
 
   function onTimeout() {
-    requestAnimationFrame(render);
+    render();
   }
 
   function advance() {
@@ -42,6 +42,7 @@ module.exports = function() {
         stop();
       }
     }
+    console.log(looping, numFrames);
   }
 
   function loop() {

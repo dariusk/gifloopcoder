@@ -1,5 +1,8 @@
 module.exports = function() {
-  var context = document.createElement("canvas").getContext("2d");
+  var Canvas = require('canvas')
+  , Image = Canvas.Image
+  , canvas = new Canvas(200, 200)
+  , context = canvas.getContext('2d');
 
   function getColor(prop, t, def) {
     if(prop === undefined) {

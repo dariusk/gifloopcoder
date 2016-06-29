@@ -1,4 +1,12 @@
 var Shape = require('./shape');
+var Canvas = require('canvas')
+, Image = Canvas.Image
+, canvasGlobal = new Canvas(200, 200)
+, context = canvasGlobal.getContext('2d');
+var fs = require('fs');
+
+
+
 
 module.exports = function(){
   var shape = new Shape();
@@ -11,7 +19,7 @@ module.exports = function(){
     styles = null;
 
   function init(w, h, stylesValue, interpolation) {
-    canvas = document.createElement("canvas");
+    canvas = canvasGlobal;
     width = canvas.width = w;
     height = canvas.height = h;
     context = canvas.getContext("2d");
@@ -25,17 +33,17 @@ module.exports = function(){
     height = canvas.height = h;
   }
 
-  function addShape(newShape, props) {
+  function addShape(newShape, props, encoder) {
     var item = shape.create(newShape, props);
     list.push(item);
-    render(0);
+    render(0, encoder);
   }
 
   function clear() {
     list.length = 0;
   }
 
-  function render(t) {
+  function render(t, encoder) {
     if(styles.backgroundColor === "transparent") {
       context.clearRect(0, 0, width, height);
     }
@@ -46,6 +54,14 @@ module.exports = function(){
     for(var i = 0; i < list.length; i++) {
       list[i].render(context, t);
     }
+    console.log('rendered!', Math.round(t*60));
+    /*
+    var data = canvas.toDataURL().replace(/^data:image\/\w+;base64,/, '');
+    var buf = new Buffer(data, 'base64');
+    fs.writeFile(`image-${Math.round(t*60)}.png`, buf);
+    */
+    encoder.addFrame(context);
+
   }
 
   function getCanvas() {
