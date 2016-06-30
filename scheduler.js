@@ -1,7 +1,7 @@
 module.exports = function() {
   var t = 0,
     duration = 2,
-    fps = 30,
+    fps = 60,
     running = false,
     looping = false,
     renderCallback = null,
@@ -18,11 +18,16 @@ module.exports = function() {
         renderCallback(t);
       }
       advance();
-      render();
+      setTimeout(onTimeout, 200);
+      
     }
     else if(completeCallback) {
       completeCallback();
     }
+  }
+
+  function onTimeout() {
+    render();
   }
 
   function advance() {

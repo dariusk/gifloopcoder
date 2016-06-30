@@ -30,10 +30,10 @@ module.exports = function(){
     height = canvas.height = h;
   }
 
-  function addShape(newShape, props, encoder) {
+  function addShape(newShape, props) {
     var item = shape.create(newShape, props);
     list.push(item);
-    render(0, encoder);
+    render(0);
   }
 
   function clear() {
@@ -57,7 +57,7 @@ module.exports = function(){
     var buf = new Buffer(data, 'base64');
     fs.writeFile(`image-${Math.round(t*60)}.png`, buf);
     */
-    encoder.addFrame(context);
+    if (encoder && t > 0) encoder.addFrame(context);
 
   }
 

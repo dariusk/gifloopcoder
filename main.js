@@ -10,7 +10,7 @@ var encoder = new GIFEncoder(400, 400);
 encoder.createReadStream().pipe(fs.createWriteStream('myanimated.gif'));
 encoder.start();
 encoder.setRepeat(0);   // 0 for repeat, -1 for no-repeat
-encoder.setDelay(5);  // frame delay in ms
+encoder.setDelay(1000*(1/60));  // frame delay in ms
 encoder.setQuality(1); // image quality. 10 is default.
 
 
